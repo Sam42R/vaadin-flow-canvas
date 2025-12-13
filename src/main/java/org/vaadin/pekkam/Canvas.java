@@ -32,6 +32,7 @@ import java.util.concurrent.CompletableFuture;
 @SuppressWarnings("serial")
 public class Canvas extends Component implements HasStyle, HasSize, KeyNotifier {
     private final CanvasRenderingContext2D context;
+    private final CanvasRenderingContextWrapper contextWrapper;
 
     /**
      * Creates a new canvas component with the given size.
@@ -51,6 +52,7 @@ public class Canvas extends Component implements HasStyle, HasSize, KeyNotifier 
      */
     public Canvas(int width, int height) {
         context = new CanvasRenderingContext2D(this);
+        contextWrapper = new CanvasRenderingContextWrapper(context);
 
         getElement().setAttribute("width", String.valueOf(width));
         getElement().setAttribute("height", String.valueOf(height));
@@ -67,6 +69,10 @@ public class Canvas extends Component implements HasStyle, HasSize, KeyNotifier 
      */
     public CanvasRenderingContext2D getContext() {
         return context;
+    }
+
+    public CanvasRenderingContextWrapper getContextWrapper() {
+        return contextWrapper;
     }
 
     /**

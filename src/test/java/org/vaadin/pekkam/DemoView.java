@@ -2,6 +2,8 @@ package org.vaadin.pekkam;
 
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.router.Route;
+import in.virit.color.Color;
+import in.virit.color.RgbColor;
 import org.vaadin.pekkam.event.MouseEvent;
 
 import java.awt.geom.Point2D;
@@ -14,6 +16,7 @@ public class DemoView extends Div {
 
     private final Canvas canvas;
     private final CanvasRenderingContext2D ctx;
+    private final CanvasRenderingContextWrapper wrapper;
 
     public DemoView() {
         Div label = new Div();
@@ -23,6 +26,7 @@ public class DemoView extends Div {
         canvas.getStyle().set("border", "1px solid");
 
         ctx = canvas.getContext();
+        wrapper = canvas.getContextWrapper();
 
         Div buttons = new Div();
         buttons.add(new NativeButton("Draw random circle",
@@ -112,10 +116,10 @@ public class DemoView extends Div {
     private void drawRandomCircle() {
         ctx.save();
         ctx.setLineWidth(2);
-        ctx.setFillStyle(getRandomColor());
+        wrapper.setFillStyle(getRandomColor());
         ctx.beginPath();
-        ctx.arc(Math.random() * CANVAS_WIDTH, Math.random() * CANVAS_HEIGHT,
-                10 + Math.random() * 90, 0, 2 * Math.PI, false);
+        wrapper.arc(new Point2D.Double(Math.random() * CANVAS_WIDTH, Math.random() * CANVAS_HEIGHT),
+                10 + Math.random() * 90, 0, 360, true);
         ctx.closePath();
         ctx.stroke();
         ctx.fill();
@@ -128,11 +132,11 @@ public class DemoView extends Div {
         ctx.beginPath();
 
         ctx.setLineWidth(2);
-        ctx.setStrokeStyle(getRandomColor());
-        ctx.arc(450, 250, 45, 0, 2 * Math.PI, false);
+        wrapper.setStrokeStyle(getRandomColor());
+        wrapper.arc(new Point2D.Double(450, 250), 45, 0, 360, true);
         ctx.stroke();
 
-        ctx.setFillStyle(getRandomColor());
+        wrapper.setFillStyle(getRandomColor());
         ctx.fill();
 
         ctx.clip();
@@ -191,8 +195,8 @@ public class DemoView extends Div {
         ctx.setLineDash();
     }
 
-    private String getRandomColor() {
-        return String.format("rgb(%s, %s, %s)", (int) (Math.random() * 256),
+    private Color getRandomColor() {
+        return new RgbColor((int) (Math.random() * 256),
                 (int) (Math.random() * 256), (int) (Math.random() * 256));
     }
 
