@@ -13,7 +13,7 @@ Add the dependency to your Vaadin 10+ project's `pom.xml`:
 <dependency>
     <groupId>org.parttio</groupId>
     <artifactId>canvas-java</artifactId>
-    <version>2.0.0</version>
+    <version>2.2.0</version>
 </dependency>
 ```
 
@@ -23,7 +23,7 @@ Canvas canvas = new Canvas(800, 500);
 CanvasRenderingContext2D ctx = canvas.getContext();
 
 // Draw a red line from point (10,10) to (100,100):
-ctx.setStrokeStyle("red");
+ctx.setStrokeStyle(NamedColor.RED);
 ctx.beginPath();
 ctx.moveTo(10, 10);
 ctx.lineTo(100, 100);
