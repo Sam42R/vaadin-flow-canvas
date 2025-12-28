@@ -29,6 +29,9 @@
         <developer>
             <name>kkleinwi</name>
         </developer>
+        <developer>
+            <name>Sam42R</name>
+        </developer>
     </developers>
     <licenses>
         <license>
@@ -65,6 +68,11 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>in.virit</groupId>
+            <artifactId>color</artifactId>
+            <version>0.0.4</version>
         </dependency>
         <dependency>
             <groupId>jakarta.servlet</groupId>
